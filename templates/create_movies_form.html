@@ -24,13 +24,15 @@
             <input type="text" name="director" id="director" autocomplete="off" size="180px"><br>
         </div>
 
-        <div data-rating="0" style="margin-top: 30px;">
-            <label for="rating">User rating:</label><br>
-            <span class="star">&nbsp;</span>
-            <span class="star">&nbsp;</span>
-            <span class="star">&nbsp;</span>
-            <span class="star">&nbsp;</span>
-            <span class="star">&nbsp;</span>
+        <div style="margin-top: 30px;">
+            <label for="rating">User Rating:</label>
+            <select name="rating" id="rating">
+                <option value = 1>1 out of 5 stars</option>
+                <option value = 2>3 out of 5 stars</option>
+                <option value = 3>3 out of 5 stars</option>
+                <option value = 4>4 out of 5 stars</option>
+                <option value = 5>5 out of 5 stars</option>
+            </select>
         </div>
 
         <button type="submit"
@@ -68,39 +70,4 @@
     }
 </style>
 
-<script>  
-    //listens to see if the stars are clicked or not
-    document.addEventListener('DOMContentLoaded', function(){
-        let stars = document.querySelectorAll('.star');
-        stars.forEach(function(star){
-            star.addEventListener('click', setRating); 
-        });
-        
-        let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
-        let target = stars[rating - 1];
-        target.dispatchEvent(new MouseEvent('click'));
-    });
-
-    function setRating(ev){
-        let span = ev.currentTarget;
-        let stars = document.querySelectorAll('.star');
-        let match = false;
-        let num = 0;
-        stars.forEach(function(star, index){
-            if(match){
-                star.classList.remove('rated');
-            }else{
-                star.classList.add('rated');
-            }
-            //are we currently looking at the span that was clicked
-            if(star === span){
-                match = true;
-                num = index + 1;
-            }
-            rating = num;
-        });
-        document.querySelector('.stars').setAttribute('data-rating', num);
-    }
-    
-</script>
 {% endblock %}

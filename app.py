@@ -29,7 +29,9 @@ def create_movie():
     director = request.form.get('director', None)
     rating = request.form.get('rating', None)
 
-    if (title == None or director==None or int(rating)<1 or int(rating)>5):
+    if (title == None or director== None or int(rating)<1 or int(rating)>5):
+        return redirect('/movies/new')
+    elif (title == '' or director== '' or int(rating)<1 or int(rating)>5):
         return redirect('/movies/new')
     else:
         movie_repository_singleton.create_movie(title, director, rating)
